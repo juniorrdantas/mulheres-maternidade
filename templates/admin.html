@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        body {
+            background: #fdf9fc;
+            color: #493d4e;
+            margin: 0;
+        }
+
+        .painel {
+            max-width: 1200px;
+            margin: 35px auto;
+            padding: 20px;
+        }
+
+        .cabecalho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        h1, h2 {
+            color: #543269;
+        }
+
+        .sair {
+            background: #75458e;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 9px;
+            text-decoration: none;
+        }
+
+        .indicadores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(84, 50, 105, 0.07);
+        }
+
+        .card span {
+            color: #887b8d;
+            font-size: 14px;
+        }
+
+        .card strong {
+            display: block;
+            color: #75458e;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+        .estatisticas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .estatisticas h3 {
+            color: #75458e;
+            margin-top: 0;
+        }
+
+        .estatisticas ul {
+            padding-left: 20px;
+            line-height: 1.9;
+        }
+
+        .tabela-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            overflow-x: auto;
+            box-shadow: 0 5px 20px rgba(84, 50, 105, 0.07);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th, td {
+            padding: 13px;
+            border-bottom: 1px solid #eaddea;
+            text-align: left;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        th {
+            color: #75458e;
+            background: #fce8f1;
+        }
+
+        .relato {
+            max-width: 300px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .vazio {
+            text-align: center;
+            padding: 25px;
+            color: #887b8d;
+        }
+
+        @media (max-width: 600px) {
+            .painel {
+                margin: 15px auto;
+                padding: 12px;
+            }
+
+            .cabecalho h1 {
+                font-size: 23px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="painel">
+
+    <header class="cabecalho">
+        <div>
+            <h1>Painel Administrativo</h1>
+            <p>
+                Mulheres, Maternidade e Mercado de Trabalho
+            </p>
+        </div>
+
+        <a href="/logout" class="sair">Sair do painel</a>
+    </header>
+
+    <section class="indicadores">
+
+        <div class="card">
+            <span>Total de participantes</span>
+            <strong>{{ total }}</strong>
+        </div>
+
+        <div class="card">
+            <span>Relataram discriminação</span>
+            <strong>{{ discriminacao_sim }}</strong>
+        </div>
+
+        <div class="card">
+            <span>Percentual de discriminação</span>
+            <strong>{{ percentual_discriminacao }}%</strong>
+        </div>
+
+    </section>
+
+    <h2>Estatísticas da pesquisa</h2>
+
+    <section class="estatisticas">
+
+        <div class="card">
+            <h3>Maternidade</h3>
+            <ul>
+                {% for nome, quantidade in maternidade %}
+                    <li>{{ nome }}: {{ quantidade }}</li>
+                {% else %}
+                    <li>Sem respostas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Quantidade de filhos</h3>
+            <ul>
+                {% for nome, quantidade in quantidade_filhos %}
+                    <li>{{ nome }} filho(s): {{ quantidade }}</li>
+                {% else %}
+                    <li>Sem respostas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Escolaridade</h3>
+            <ul>
+                {% for nome, quantidade in escolaridade %}
+                    <li>{{ nome }}: {{ quantidade }}</li>
+                {% else %}
+                    <li>Sem respostas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Profissões</h3>
+            <ul>
+                {% for nome, quantidade in profissoes %}
+                    <li>{{ nome }}: {{ quantidade }}</li>
+                {% else %}
+                    <li>Sem respostas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Relatos de discriminação</h3>
+            <ul>
+                {% for nome, quantidade in discriminacao %}
+                    <li>{{ nome }}: {{ quantidade }}</li>
+                {% else %}
+                    <li>Sem respostas.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </section>
+
+    <h2>Respostas das participantes</h2>
+
+    <section class="tabela-container">
+
+        {% if participantes %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Profissão</th>
+                    <th>Escolaridade</th>
+                    <th>Tem filhos?</th>
+                    <th>Quantidade</th>
+                    <th>Discriminação?</th>
+                    <th>Relato</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for p in participantes %}
+                <tr>
+                    <td>{{ p.nome }}</td>
+                    <td>{{ p.idade }}</td>
+                    <td>{{ p.profissao }}</td>
+                    <td>{{ p.escolaridade }}</td>
+                    <td>{{ p.tem_filhos }}</td>
+                    <td>{{ p.quantidade_filhos or 0 }}</td>
+                    <td>{{ p.sofreu_discriminacao }}</td>
+                    <td class="relato">{{ p.relato or "Sem relato" }}</td>
+                    <td>
+                        {% if p.data_cadastro %}
+                            {{ p.data_cadastro.strftime("%d/%m/%Y %H:%M") }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+
+        <div class="vazio">
+            Ainda não existem participantes cadastradas.
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+</html>

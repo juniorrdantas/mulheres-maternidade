@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fdf9fc">
+
+    <meta name="description" content="Projeto de Extensão Universitária: Mulheres, Maternidade e Mercado de Trabalho: Igualdade de Oportunidades e Discriminação Profissional.">
+
+    <title>Mulheres, Maternidade e Mercado de Trabalho</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        .topo {
+            position: relative;
+        }
+
+        .botao-admin {
+            position: absolute;
+            top: 50%;
+            right: 25px;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #fce8f1;
+            color: #75458e;
+            font-size: 21px;
+            text-decoration: none;
+            transition: 0.2s;
+            z-index: 10;
+        }
+
+        .botao-admin:hover {
+            background: #75458e;
+            color: #ffffff;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        /* Acabamento das ilustrações 3D */
+
+        .ilustracoes-maternidade {
+            align-items: center;
+        }
+
+        .ilustracao-card {
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .ilustracao-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 40% 40% 12px 12px;
+        }
+
+        .ilustracao-card:nth-child(2) {
+            margin-top: 30px;
+        }
+
+        .ilustracao-legenda {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 600px) {
+            .botao-admin {
+                right: 12px;
+                width: 32px;
+                height: 32px;
+                font-size: 19px;
+            }
+
+            .ilustracao-card:nth-child(2) {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="topo">
+    <div class="marca">
+        <div class="emblema">M<span>+</span></div>
+
+        <div class="identificacao">
+            <strong>CENTRO UNIVERSITÁRIO CEARENSE</strong>
+            <small>PROJETO DE EXTENSÃO</small>
+        </div>
+    </div>
+
+    <a
+        href="/login"
+        class="botao-admin"
+        title="Acesso administrativo"
+        aria-label="Acesso administrativo">
+        ⚙
+    </a>
+</header>
+
+<main>
+
+    <!-- TELA INICIAL -->
+
+    <section class="apresentacao" id="tela-inicial">
+
+        <div class="texto-apresentacao">
+
+            <span class="etiqueta">PESQUISA ACADÊMICA</span>
+
+            <h1>
+                Mulheres,<br>
+                Maternidade e<br>
+                <span>Mercado de Trabalho</span>
+            </h1>
+
+            <div class="linha"></div>
+
+            <p class="subtitulo">
+                Igualdade de Oportunidades e Discriminação Profissional
+            </p>
+
+            <p class="descricao">
+                A maternidade não deve representar uma barreira
+                para a realização profissional.
+
+                Sua participação é fundamental para compreendermos
+                os desafios enfrentados pelas mulheres no mercado
+                de trabalho e contribuirmos para uma sociedade
+                mais justa, inclusiva e igualitária.
+            </p>
+
+            <button
+                type="button"
+                class="botao-principal"
+                id="btn-participar">
+                Participar da pesquisa →
+            </button>
+
+            <div class="informacao">
+                ✦ Sua voz importa. Sua participação faz a diferença.
+            </div>
+
+        </div>
+
+        <!-- ILUSTRAÇÕES EDITORIAIS 3D -->
+
+        <div class="ilustracao">
+
+            <div class="ilustracoes-maternidade">
+
+                <!-- ILUSTRAÇÃO 1: MÃE E BEBÊ -->
+
+                <div class="ilustracao-card">
+                    <img src="/static/mae-bebe.png" alt="Ilustração 3D de mãe abraçando carinhosamente seu bebê">
+                    <div class="ilustracao-legenda">
+                        Amor que acolhe
+                    </div>
+                </div>
+
+                <!-- ILUSTRAÇÃO 2: MULHER GESTANTE -->
+
+                <div class="ilustracao-card">
+                    <img src="/static/mae-gravida.png" alt="Ilustração 3D de mulher grávida acariciando delicadamente sua barriga">
+                    <div class="ilustracao-legenda">
+                        Amor que gera vida
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TELA DA PESQUISA -->
+
+    <section
+        class="tela-pesquisa"
+        id="tela-pesquisa"
+        hidden>
+
+        <div class="cabecalho-pesquisa">
+
+            <button
+                type="button"
+                id="btn-voltar"
+                class="botao-voltar">
+                ← Voltar
+            </button>
+
+            <span class="etiqueta">PESQUISA ACADÊMICA</span>
+
+            <h1>Participe da nossa pesquisa</h1>
+
+            <p>
+                Sua experiência é importante para este estudo.
+                Responda às perguntas abaixo.
+            </p>
+
+        </div>
+
+        <!-- FORMULÁRIO -->
+
+        <div class="questionario">
+
+            <form action="/responder" method="post">
+
+                <div class="campo">
+                    <label for="nome">Nome</label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        autocomplete="name"
+                        required>
+                </div>
+
+                <div class="grade">
+
+                    <div class="campo">
+                        <label for="idade">Idade</label>
+
+                        <input
+                            type="number"
+                            id="idade"
+                            name="idade"
+                            min="16"
+                            max="120"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="profissao">Profissão</label>
+
+                        <input
+                            type="text"
+                            id="profissao"
+                            name="profissao"
+                            required>
+                    </div>
+
+                </div>
+
+                <div class="campo">
+                    <label for="escolaridade">Escolaridade</label>
+
+                    <select
+                        id="escolaridade"
+                        name="escolaridade"
+                        required>
+
+                        <option value="">Selecione</option>
+                        <option>Ensino fundamental</option>
+                        <option>Ensino médio</option>
+                        <option>Ensino superior incompleto</option>
+                        <option>Ensino superior completo</option>
+                        <option>Pós-graduação</option>
+
+                    </select>
+                </div>
+
+                <div class="grade">
+
+                    <div class="campo">
+                        <label for="tem_filhos">
+                            Você tem filhos?
+                        </label>
+
+                        <select
+                            id="tem_filhos"
+                            name="tem_filhos"
+                            required>
+
+                            <option value="">Selecione</option>
+                            <option>Sim</option>
+                            <option>Não</option>
+
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="quantidade_filhos">
+                            Quantidade de filhos
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantidade_filhos"
+                            name="quantidade_filhos"
+                            min="0"
+                            value="0">
+                    </div>
+
+                </div>
+
+                <div class="campo">
+                    <label for="sofreu_discriminacao">
+                        Já sofreu discriminação profissional relacionada à maternidade?
+                    </label>
+
+                    <select
+                        id="sofreu_discriminacao"
+                        name="sofreu_discriminacao"
+                        required>
+
+                        <option value="">Selecione</option>
+                        <option>Sim</option>
+                        <option>Não</option>
+                        <option>Prefiro não responder</option>
+
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="relato">
+                        Gostaria de relatar alguma experiência?
+                    </label>
+
+                    <textarea
+                        id="relato"
+                        name="relato"
+                        rows="5"
+                        placeholder="Compartilhe sua experiência, se desejar..."></textarea>
+                </div>
+
+                <button type="submit" class="botao-enviar">
+                    Enviar minha participação →
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- RODAPÉ -->
+
+<footer id="rodape">
+
+    <strong>Centro Universitário Cearense</strong>
+
+    <p>Projeto de Extensão Universitária</p>
+
+    <p>Mulheres, Maternidade e Mercado de Trabalho</p>
+
+    <p class="rodape-final">
+        Igualdade de oportunidades e respeito à maternidade.
+    </p>
+
+</footer>
+
+<!-- NAVEGAÇÃO ENTRE AS TELAS -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const telaInicial = document.getElementById("tela-inicial");
+    const telaPesquisa = document.getElementById("tela-pesquisa");
+    const rodape = document.getElementById("rodape");
+
+    const botaoParticipar = document.getElementById("btn-participar");
+    const botaoVoltar = document.getElementById("btn-voltar");
+
+    botaoParticipar.addEventListener("click", function () {
+
+        telaInicial.hidden = true;
+        rodape.hidden = true;
+        telaPesquisa.hidden = false;
+
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
+
+    });
+
+    botaoVoltar.addEventListener("click", function () {
+
+        telaPesquisa.hidden = true;
+        telaInicial.hidden = false;
+        rodape.hidden = false;
+
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
+
+    });
+
+});
+</script>
+
+</body>
+</html>

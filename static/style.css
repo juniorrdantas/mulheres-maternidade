@@ -1,0 +1,731 @@
+/* ======================================
+   IDENTIDADE VISUAL DA CARTILHA
+   ROSA + ROXO + LAVANDA
+====================================== */
+
+:root {
+    --rosa: #d66b9b;
+    --rosa-escuro: #ad477c;
+    --rosa-claro: #fce8f1;
+    --roxo: #75458e;
+    --roxo-escuro: #543269;
+    --lavanda: #eee5f7;
+    --fundo: #fdf9fc;
+    --branco: #ffffff;
+    --texto: #493d4e;
+    --texto-suave: #887b8d;
+    --borda: #eaddea;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ======================================
+   CABEÇALHO
+====================================== */
+
+.topo {
+    position: relative;
+    background: var(--branco);
+    padding: 18px 7%;
+    border-bottom: 1px solid var(--borda);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 88px;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.emblema {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--rosa-claro);
+    border: 2px solid var(--rosa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--roxo);
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.marca strong {
+    display: block;
+    color: var(--roxo-escuro);
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.marca small {
+    display: block;
+    color: var(--rosa-escuro);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-top: 5px;
+}
+
+/* ======================================
+   ACESSO ADMINISTRATIVO
+====================================== */
+
+.botao-admin {
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--rosa-claro);
+    border: 1px solid var(--borda);
+    color: var(--roxo);
+    font-size: 21px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.botao-admin:hover {
+    background: var(--roxo);
+    color: var(--branco);
+    transform: translateY(-50%) rotate(45deg);
+}
+
+/* ======================================
+   CONTEÚDO
+====================================== */
+
+main {
+    width: 100%;
+    max-width: 1250px;
+    margin: auto;
+    padding: 45px 30px;
+}
+
+/* ======================================
+   TELA INICIAL
+====================================== */
+
+.apresentacao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 45px;
+    min-height: 520px;
+}
+
+.texto-apresentacao {
+    min-width: 0;
+}
+
+.etiqueta {
+    display: inline-block;
+    color: var(--rosa-escuro);
+    background: var(--rosa-claro);
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.texto-apresentacao h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(36px, 5vw, 57px);
+    font-weight: normal;
+    line-height: 1.15;
+    color: var(--roxo-escuro);
+    margin: 22px 0;
+}
+
+.texto-apresentacao h1 span {
+    color: var(--rosa-escuro);
+}
+
+.linha {
+    width: 65px;
+    height: 4px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--rosa), var(--roxo));
+    margin: 25px 0;
+}
+
+.subtitulo {
+    color: var(--roxo);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.descricao {
+    max-width: 500px;
+    color: var(--texto-suave);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+/* ======================================
+   BOTÕES
+====================================== */
+
+.botao-principal,
+.botao-enviar {
+    background: linear-gradient(110deg, var(--rosa-escuro), var(--roxo));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 27px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-principal {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.botao-principal:hover,
+.botao-enviar:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+.informacao {
+    color: var(--texto-suave);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 22px;
+}
+
+/* ======================================
+   ILUSTRAÇÕES DA MATERNIDADE (ATUALIZADO PARA 3D)
+====================================== */
+
+.ilustracao {
+    width: 100%;
+    min-height: 430px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ilustracoes-maternidade {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    align-items: center;
+}
+
+.ilustracao-card {
+    min-width: 0;
+    padding: 12px;
+    border-radius: 45% 45% 18px 18px;
+    background: linear-gradient(150deg, var(--rosa-claro), var(--lavanda));
+    box-shadow: 0 12px 35px #75458e12;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ilustracao-card:first-child:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px #75458e20;
+}
+
+.ilustracao-card:nth-child(2) {
+    background: linear-gradient(150deg, var(--lavanda), #f9e6ef);
+    transform: translateY(30px);
+}
+
+.ilustracao-card:nth-child(2):hover {
+    transform: translateY(25px);
+    box-shadow: 0 18px 40px #75458e20;
+}
+
+/* Ajuste essencial para exibir as novas imagens 3D perfeitamente nos arcos */
+.ilustracao-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 40% 40% 12px 12px;
+}
+
+.ilustracao-legenda {
+    text-align: center;
+    color: var(--roxo-escuro);
+    font-family: Georgia, serif;
+    font-size: 14px;
+    padding: 10px 3px 5px;
+}
+
+/* ======================================
+   QUESTIONÁRIO
+====================================== */
+
+.tela-pesquisa {
+    width: 100%;
+    max-width: 850px;
+    min-height: 70vh;
+    margin: auto;
+    padding: 20px 0 50px;
+}
+
+.cabecalho-pesquisa {
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.cabecalho-pesquisa h1 {
+    font-family: Georgia, serif;
+    color: var(--roxo-escuro);
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: normal;
+    margin: 20px 0 10px;
+}
+
+.cabecalho-pesquisa p {
+    color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.botao-voltar {
+    display: block;
+    margin-bottom: 25px;
+    padding: 11px 17px;
+    background: var(--lavanda);
+    color: var(--roxo-escuro);
+    border: 1px solid #dfcce9;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botao-voltar:hover {
+    background: var(--rosa-claro);
+}
+
+/* ======================================
+   CARTÃO DO FORMULÁRIO
+====================================== */
+
+.questionario {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border: 1px solid var(--borda);
+    border-top: 5px solid var(--rosa);
+    border-radius: 13px;
+    box-shadow: 0 12px 35px #75458e0d;
+}
+
+.titulo-formulario {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.titulo-formulario h2 {
+    color: var(--roxo-escuro);
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.titulo-formulario p {
+    color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ======================================
+   CAMPOS
+====================================== */
+
+.campo {
+    width: 100%;
+    min-width: 0;
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    color: var(--roxo-escuro);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 9px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid var(--borda);
+    border-radius: 7px;
+    background: #fefcff;
+    color: var(--texto);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--rosa);
+    box-shadow: 0 0 0 3px #d66b9b20;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.grade {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* ======================================
+   ENVIO
+====================================== */
+
+.botao-enviar {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+}
+
+/* ======================================
+   CONFIRMAÇÃO
+====================================== */
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    margin: 55px auto;
+    padding: 25px;
+}
+
+.container header {
+    text-align: center;
+}
+
+.container header h1 {
+    font-family: Georgia, serif;
+    color: var(--roxo-escuro);
+    font-size: 38px;
+    font-weight: normal;
+}
+
+.container header p {
+    color: var(--rosa-escuro);
+}
+
+.container header span {
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+.container form {
+    background: white;
+    border: 1px solid var(--borda);
+    border-top: 5px solid var(--rosa);
+    border-radius: 12px;
+    padding: 35px;
+    margin-top: 25px;
+    box-shadow: 0 12px 35px #75458e0d;
+}
+
+.container form h2 {
+    color: var(--roxo-escuro);
+    font-family: Georgia, serif;
+}
+
+.container form p {
+    color: var(--texto-suave);
+    line-height: 1.8;
+}
+
+.container a {
+    color: var(--rosa-escuro) !important;
+    font-weight: bold;
+}
+
+/* ======================================
+   RODAPÉ
+====================================== */
+
+footer {
+    width: 100%;
+    background: var(--roxo-escuro);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+footer p {
+    color: #f4ddec;
+    margin: 5px;
+}
+
+.rodape-final {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+/* ======================================
+   OUTRAS TELAS DO SISTEMA
+====================================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: var(--lavanda);
+    color: var(--roxo-escuro);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid var(--borda);
+    text-align: left;
+}
+
+button {
+    font-family: inherit;
+}
+
+a {
+    color: var(--roxo);
+}
+
+/* ======================================
+   TABLETS
+====================================== */
+
+@media (max-width: 900px) {
+
+    main {
+        padding: 35px 25px;
+    }
+
+    .apresentacao {
+        gap: 20px;
+    }
+
+    .ilustracao {
+        min-height: 350px;
+    }
+
+    .ilustracao-card {
+        padding: 9px;
+    }
+}
+
+/* ======================================
+   CELULARES
+====================================== */
+
+@media (max-width: 700px) {
+
+    .topo {
+        padding: 15px 5%;
+        min-height: 76px;
+    }
+
+    .emblema {
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
+    }
+
+    .marca strong {
+        font-size: 11px;
+        padding-right: 35px;
+    }
+
+    .marca small {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+
+    .botao-admin {
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 19px;
+    }
+
+    main {
+        padding: 25px 5%;
+    }
+
+    .apresentacao {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .texto-apresentacao h1 {
+        font-size: clamp(32px, 9vw, 42px);
+    }
+
+    .subtitulo {
+        font-size: 16px;
+    }
+
+    .descricao {
+        font-size: 14px;
+    }
+
+    .botao-principal {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .ilustracao {
+        min-height: auto;
+        padding: 20px 0 40px;
+    }
+
+    .ilustracoes-maternidade {
+        gap: 10px;
+    }
+
+    .ilustracao-card {
+        padding: 8px;
+    }
+
+    .ilustracao-card:nth-child(2) {
+        transform: translateY(20px);
+    }
+
+    .ilustracao-card:nth-child(2):hover {
+        transform: translateY(15px);
+    }
+
+    .ilustracao-legenda {
+        font-size: 12px;
+    }
+
+    .tela-pesquisa {
+        padding: 10px 0 30px;
+    }
+
+    .cabecalho-pesquisa {
+        padding: 20px 5px;
+    }
+
+    .cabecalho-pesquisa h1 {
+        font-size: 27px;
+    }
+
+    .questionario,
+    .tela-pesquisa .questionario {
+        padding: 25px 18px;
+    }
+
+    .titulo-formulario h2 {
+        font-size: 24px;
+    }
+
+    .grade {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+
+    .container {
+        margin: 25px auto;
+        padding: 15px;
+    }
+
+    .container form {
+        padding: 25px 18px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}
+
+/* ======================================
+   CELULARES PEQUENOS
+====================================== */
+
+@media (max-width: 380px) {
+
+    .texto-apresentacao h1 {
+        font-size: 30px;
+    }
+
+    .ilustracoes-maternidade {
+        gap: 6px;
+    }
+
+    .ilustracao-card {
+        padding: 6px;
+    }
+
+    .ilustracao-legenda {
+        font-size: 11px;
+    }
+
+    .questionario {
+        padding: 20px 13px;
+    }
+
+    .botao-admin {
+        right: 9px;
+        width: 30px;
+        height: 30px;
+    }
+}
