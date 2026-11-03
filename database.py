@@ -8,15 +8,20 @@ DATABASE_URL = os.getenv(
     "sqlite:///./pesquisa.db"
 )
 
-# Compatibilidade com URLs do PostgreSQL
+# Utilizar explicitamente o driver psycopg2
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace(
         "postgres://",
+        "postgresql+psycopg2://",
+        1
+    )
+elif DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace(
         "postgresql://",
+        "postgresql+psycopg2://",
         1
     )
 
-# Configuração específica para SQLite
 connect_args = {}
 
 if DATABASE_URL.startswith("sqlite"):
