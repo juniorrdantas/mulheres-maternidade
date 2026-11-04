@@ -614,92 +614,54 @@ a {
 }
 
 /* ======================================
-   CELULARES (Correção do Cabeçalho)
+   CELULARES
 ====================================== */
 
 @media (max-width: 700px) {
 
     .topo {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        padding: 12px 15px;
-        min-height: auto;
-        position: relative;
+        padding: 15px 5%;
+        min-height: 76px;
     }
 
     .marca {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex: 1;
-        min-width: 0;
-        padding-right: 35px; /* Espaço reservado para a engrenagem não cobrir o texto */
+        gap: 8px;
     }
 
     .emblema {
-        width: 40px;
-        height: 40px;
-        font-size: 19px;
-        flex-shrink: 0;
-    }
-
-    .marca div {
-        min-width: 0;
-        flex: 1;
+        width: 45px;
+        height: 45px;
+        font-size: 21px;
     }
 
     .marca strong {
-        font-size: 10px;
-        letter-spacing: 0.5px;
-        line-height: 1.2;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        font-size: 11px;
+        padding-right: 0;
     }
 
     .marca small {
         font-size: 8px;
         letter-spacing: 1px;
-        margin-top: 2px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
-    /* Botões de acesso logo abaixo ou compactos */
+    /* Documentos no cabeçalho */
+
     .acoes-topo {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-left: 0;
-        padding: 0;
-        flex-shrink: 0;
+        gap: 5px;
+        padding-right: 40px;
     }
 
     .acoes-topo .botao-documento {
-        min-height: 32px;
-        padding: 6px 10px;
-        font-size: 9px;
-        white-space: nowrap;
+        min-height: 36px;
+        padding: 9px 10px;
+        font-size: 10px;
     }
 
-    /* Engrenagem fixa e discreta no canto superior direito */
     .botao-admin {
-        position: absolute;
-        top: 50%;
-        right: 12px;
-        transform: translateY(-50%);
-        margin-left: 0;
-        width: 28px;
-        height: 28px;
-        font-size: 15px;
-    }
-
-    .botao-admin:hover {
-        transform: translateY(-50%) rotate(45deg);
+        right: 8px;
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
     }
 
     main {
