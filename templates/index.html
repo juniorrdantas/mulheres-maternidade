@@ -255,22 +255,68 @@
 
         @media (max-width: 600px) {
 
+            .topo {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                padding: 16px 15px;
+            }
+
+            .marca {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                width: 100%;
+                margin: 0;
+            }
+
+            .emblema {
+                flex-shrink: 0;
+            }
+
+            .identificacao {
+                text-align: left;
+            }
+
+            .marca strong {
+                font-size: 13px;
+                letter-spacing: 0.5px;
+            }
+
             .acoes-topo {
-                gap: 5px;
-                padding-right: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+                margin: 0;
+                padding: 0;
             }
 
             .acoes-topo .botao-documento {
+                flex: 1;
+                min-width: 0;
                 min-height: 36px;
-                padding: 9px 10px;
+                padding: 9px 5px;
                 font-size: 10px;
+                text-align: center;
             }
 
             .botao-admin {
-                right: 8px;
-                width: 30px;
-                height: 30px;
+                position: static;
+                flex: 0 0 34px;
+                width: 34px;
+                height: 34px;
+                margin: 0;
+                transform: none;
                 font-size: 18px;
+            }
+
+            .botao-admin:hover {
+                transform: rotate(45deg);
             }
 
             .ilustracao-card:nth-child(2) {
@@ -304,15 +350,31 @@
 
         @media (max-width: 380px) {
 
+            .topo {
+                padding: 14px 10px;
+            }
+
+            .marca {
+                gap: 9px;
+            }
+
+            .marca strong {
+                font-size: 11px;
+            }
+
             .acoes-topo {
-                gap: 4px;
-                padding-right: 36px;
+                gap: 6px;
             }
 
             .acoes-topo .botao-documento {
-                min-height: 32px;
-                padding: 7px 7px;
+                padding: 8px 3px;
                 font-size: 9px;
+            }
+
+            .botao-admin {
+                flex-basis: 32px;
+                width: 32px;
+                height: 32px;
             }
         }
     </style>
