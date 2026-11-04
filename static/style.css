@@ -614,7 +614,7 @@ a {
 }
 
 /* ======================================
-   CELULARES (Ajuste limpo e alinhado)
+   CELULARES (Logotipo em cima, botões e engrenagem na mesma linha embaixo)
 ====================================== */
 
 @media (max-width: 700px) {
@@ -626,6 +626,7 @@ a {
         gap: 12px;
         padding: 18px 15px;
         min-height: auto;
+        position: relative; /* Mantém para posicionamento seguro se necessário */
     }
 
     .marca {
@@ -656,7 +657,7 @@ a {
         margin-top: 2px;
     }
 
-    /* Documentos no cabeçalho centralizados na mesma altura dos botões */
+    /* Cartilha, Slide e Engrenagem juntos e alinhados na mesma linha */
 
     .acoes-topo {
         width: 100%;
@@ -665,7 +666,7 @@ a {
         justify-content: center;
         gap: 8px;
         margin: 0;
-        padding: 0 36px 0 0; /* Espaço reservado para a engrenagem à direita */
+        padding: 0; /* Remove padding antigo */
     }
 
     .acoes-topo .botao-documento {
@@ -676,19 +677,20 @@ a {
     }
 
     .botao-admin {
-        position: absolute;
+        position: static; /* Sai do posicionamento absoluto e entra na linha junto com os botões */
         top: auto;
-        bottom: 18px; /* Alinhado exatamente na mesma altura dos botões de documentos */
-        right: 15px;
+        bottom: auto;
+        right: auto;
         transform: none;
         margin-left: 0;
-        width: 32px;
-        height: 32px;
+        width: 34px;
+        height: 34px;
         font-size: 17px;
+        flex-shrink: 0;
     }
 
     .botao-admin:hover {
-        transform: rotate(45deg);
+        transform: rotate(45deg); /* Remove o translateY para não bugar na linha */
     }
 
     main {
@@ -816,7 +818,6 @@ a {
 
     .acoes-topo {
         gap: 6px;
-        padding-right: 32px;
     }
 
     .acoes-topo .botao-documento {
@@ -826,10 +827,8 @@ a {
     }
 
     .botao-admin {
-        bottom: 15px;
-        right: 10px;
-        width: 28px;
-        height: 28px;
+        width: 30px;
+        height: 30px;
         font-size: 15px;
     }
 }
@@ -842,7 +841,6 @@ a {
 
     .acoes-topo {
         gap: 4px;
-        padding-right: 28px;
     }
 
     .acoes-topo .botao-documento {
