@@ -29,10 +29,11 @@ class Participante(Base):
     sofreu_discriminacao = Column(String(50), nullable=True)
     relato = Column(Text, nullable=True)
 
-# Data do cadastro
-data_cadastro = Column(
-    DateTime,
-    default=lambda: datetime.now(
-        ZoneInfo("America/Fortaleza")
-    ).replace(tzinfo=None)
-)
+    # Data do cadastro - horário de Fortaleza
+    data_cadastro = Column(
+        DateTime,
+        default=lambda: datetime.now(
+            ZoneInfo("America/Fortaleza")
+        ).replace(tzinfo=None)
+    )
+
