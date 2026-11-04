@@ -28,8 +28,6 @@ app = FastAPI(
     title="Mulheres, Maternidade e Mercado de Trabalho"
 )
 
-
-# Verifica a chave de sessão
 SESSION_SECRET = os.getenv("SESSION_SECRET")
 
 if not SESSION_SECRET:
@@ -37,8 +35,6 @@ if not SESSION_SECRET:
         "SESSION_SECRET não encontrada no arquivo .env"
     )
 
-
-# Configuração das sessões
 app.add_middleware(
     SessionMiddleware,
     secret_key=SESSION_SECRET,
@@ -46,8 +42,6 @@ app.add_middleware(
     https_only=False
 )
 
-
-# Arquivos estáticos e templates
 app.mount(
     "/static",
     StaticFiles(directory="static"),
@@ -92,6 +86,118 @@ def administrador_logado(request: Request):
 
 
 # --------------------------------------------------
+# MENSAGENS PERSONALIZADAS DE INCENTIVO
+# --------------------------------------------------
+
+def gerar_mensagem_incentivo(
+    situacao_trabalho,
+    dificuldade_trabalho,
+    preocupacao_profissional,
+    conhecimento_direitos,
+    sofreu_discriminacao
+):
+
+    dificuldade = (dificuldade_trabalho or "").lower()
+    preocupacao = (preocupacao_profissional or "").lower()
+    conhecimento = (conhecimento_direitos or "").lower()
+    discriminacao = (sofreu_discriminacao or "").lower()
+    situacao = (situacao_trabalho or "").lower()
+
+    # Situação de discriminação
+    if (
+        discriminacao.strip() == "sim"
+        or "rejeição" in dificuldade
+        or "pressão" in dificuldade
+    ):
+        return (
+            "Você merece respeito e igualdade!",
+            "Nenhuma mulher deve ser prejudicada profissionalmente "
+            "por ser mãe. Sua experiência merece ser ouvida, seus "
+            "direitos precisam ser respeitados e sua capacidade "
+            "profissional não pode ser definida pela maternidade. "
+            "Você merece trabalhar em um ambiente digno, justo e "
+            "livre de discriminação."
+        )
+
+    # Situação de desemprego
+    if "desempregada" in situacao:
+        return (
+            "Novas oportunidades podem surgir!",
+            "Estar fora do mercado de trabalho não diminui seu "
+            "talento, sua capacidade ou seu valor. Sua trajetória "
+            "continua sendo importante. A maternidade faz parte "
+            "da sua história, mas não limita seus sonhos nem suas "
+            "possibilidades profissionais. Você merece oportunidades "
+            "e condições justas para recomeçar."
+        )
+
+    # Dificuldade de conciliar trabalho e maternidade
+    if (
+        "conciliar" in preocupacao
+        or "rotina de trabalho" in preocupacao
+    ):
+        return (
+            "Você não precisa dar conta de tudo sozinha!",
+            "Conciliar maternidade e trabalho pode ser desafiador. "
+            "É importante lembrar que o cuidado com os filhos não "
+            "deve ser uma responsabilidade enfrentada sem apoio. "
+            "Você também merece tempo, oportunidades, reconhecimento "
+            "e condições dignas para desenvolver sua vida profissional."
+        )
+
+    # Dificuldade com creche e rede de apoio
+    if (
+        "creche" in preocupacao
+        or "deixar o bebê" in preocupacao
+        or "rede de apoio" in preocupacao
+    ):
+        return (
+            "Você merece apoio nessa caminhada!",
+            "Ter uma rede de apoio e acesso a serviços de cuidado "
+            "infantil pode fazer diferença na vida de uma mãe. "
+            "Buscar apoio não é sinal de fraqueza. É um direito "
+            "e uma necessidade legítima. Sua participação ajuda "
+            "a dar visibilidade a essa realidade."
+        )
+
+    # Preocupação com renda
+    if "renda" in preocupacao:
+        return (
+            "Seus sonhos e sua independência importam!",
+            "A preocupação com a renda e o sustento da família "
+            "é uma realidade para muitas mulheres. Você merece "
+            "oportunidades de trabalho, valorização profissional "
+            "e condições para construir um futuro com mais "
+            "segurança e autonomia."
+        )
+
+    # Conhecimento dos direitos
+    if (
+        "dúvidas" in conhecimento
+        or "não conheço" in conhecimento
+    ):
+        return (
+            "Conhecer seus direitos é um passo importante!",
+            "Toda mulher merece conhecer e ter respeitados seus "
+            "direitos. Buscar informação é uma forma de fortalecer "
+            "sua autonomia e reconhecer o valor da sua trajetória. "
+            "Você não está sozinha nessa busca por respeito e "
+            "igualdade de oportunidades."
+        )
+
+    # Mensagem geral para quem não se enquadrou nas situações acima
+    return (
+        "Sua voz importa e sua história tem valor!",
+        "Sua participação contribui para ampliar o diálogo sobre "
+        "maternidade, trabalho e igualdade de oportunidades. "
+        "Cada experiência compartilhada ajuda a dar visibilidade "
+        "aos desafios enfrentados pelas mulheres. Continue "
+        "reconhecendo seu valor, sua capacidade e seus direitos. "
+        "Você merece respeito e oportunidades."
+    )
+
+
+# --------------------------------------------------
 # PÁGINA INICIAL
 # --------------------------------------------------
 
@@ -109,31 +215,53 @@ def inicio(request: Request):
 
 @app.post("/responder")
 def responder(
+    request: Request,
     nome: str = Form(...),
     idade: int = Form(...),
-    profissao: str = Form(...),
-    escolaridade: str = Form(...),
-    tem_filhos: str = Form(...),
-    quantidade_filhos: int = Form(0),
+    situacao_trabalho: str = Form(...),
+    dificuldade_trabalho: str = Form(...),
+    preocupacao_profissional: str = Form(...),
+    conhecimento_direitos: str = Form(...),
+    suporte_cras: str = Form(...),
     sofreu_discriminacao: str = Form(...),
     relato: str = Form(""),
     db: Session = Depends(get_db)
 ):
 
     participante = Participante(
-        nome=nome,
+        nome=nome.strip(),
         idade=idade,
-        profissao=profissao,
-        escolaridade=escolaridade,
-        tem_filhos=tem_filhos,
-        quantidade_filhos=quantidade_filhos,
-        situacao_trabalho="",
+
+        # Campos da pesquisa atual
+        situacao_trabalho=situacao_trabalho,
+        dificuldade_trabalho=dificuldade_trabalho,
+        preocupacao_profissional=preocupacao_profissional,
+        conhecimento_direitos=conhecimento_direitos,
+        suporte_cras=suporte_cras,
         sofreu_discriminacao=sofreu_discriminacao,
-        relato=relato
+        relato=relato.strip()
     )
 
-    db.add(participante)
-    db.commit()
+    try:
+        db.add(participante)
+        db.commit()
+
+    except Exception:
+        db.rollback()
+        raise
+
+    # Gera a mensagem personalizada após o registro no banco
+    titulo, mensagem = gerar_mensagem_incentivo(
+        situacao_trabalho=situacao_trabalho,
+        dificuldade_trabalho=dificuldade_trabalho,
+        preocupacao_profissional=preocupacao_profissional,
+        conhecimento_direitos=conhecimento_direitos,
+        sofreu_discriminacao=sofreu_discriminacao
+    )
+
+    # Guarda somente a mensagem de agradecimento na sessão
+    request.session["titulo_incentivo"] = titulo
+    request.session["mensagem_incentivo"] = mensagem
 
     return RedirectResponse(
         "/obrigado",
@@ -142,14 +270,32 @@ def responder(
 
 
 # --------------------------------------------------
-# PÁGINA DE AGRADECIMENTO
+# PÁGINA DE AGRADECIMENTO PERSONALIZADO
 # --------------------------------------------------
 
 @app.get("/obrigado", response_class=HTMLResponse)
 def obrigado(request: Request):
+
+    titulo = request.session.pop(
+        "titulo_incentivo",
+        "Sua voz importa!"
+    )
+
+    mensagem = request.session.pop(
+        "mensagem_incentivo",
+        "Sua participação é muito importante. Cada experiência "
+        "compartilhada contribui para fortalecer o debate sobre "
+        "maternidade, igualdade de oportunidades e respeito às "
+        "mulheres no mercado de trabalho."
+    )
+
     return templates.TemplateResponse(
         request=request,
-        name="obrigado.html"
+        name="obrigado.html",
+        context={
+            "titulo_incentivo": titulo,
+            "mensagem_incentivo": mensagem
+        }
     )
 
 
@@ -187,7 +333,6 @@ def realizar_login(
     usuario_correto = os.getenv("ADMIN_USERNAME")
     senha_correta = os.getenv("ADMIN_PASSWORD")
 
-    # Verifica se as configurações existem
     if not usuario_correto or not senha_correta:
         return templates.TemplateResponse(
             request=request,
@@ -198,12 +343,10 @@ def realizar_login(
             status_code=500
         )
 
-    # Compara o usuário, permitindo caracteres acentuados
     usuario_valido = (
         usuario.strip() == usuario_correto.strip()
     )
 
-    # Compara a senha de maneira segura
     senha_valida = secrets.compare_digest(
         senha.encode("utf-8"),
         senha_correta.encode("utf-8")
@@ -215,7 +358,6 @@ def realizar_login(
 
         request.session["admin_logado"] = True
 
-        # Define a expiração fixa de 5 minutos
         request.session["expiracao"] = (
             datetime.now() + timedelta(minutes=5)
         ).timestamp()
@@ -260,22 +402,19 @@ def admin(
     db: Session = Depends(get_db)
 ):
 
-    # Verifica autenticação e prazo da sessão
     if not administrador_logado(request):
         return RedirectResponse(
             "/login",
             status_code=303
         )
 
-    # Busca os participantes no banco
     participantes = db.query(Participante).order_by(
         Participante.data_cadastro.desc()
     ).all()
 
-    # Total de participantes
     total = len(participantes)
 
-    # Participantes que relataram discriminação
+    # Discriminação profissional
     discriminacao_sim = sum(
         1
         for p in participantes
@@ -283,43 +422,63 @@ def admin(
         in ["sim", "s", "true", "1"]
     )
 
-    # Percentual de discriminação
     percentual_discriminacao = (
         round((discriminacao_sim / total) * 100, 1)
         if total else 0
     )
 
-    # Estatísticas de escolaridade
+    # Estatísticas da pesquisa atual
+    situacao_trabalho = Counter(
+        p.situacao_trabalho or "Não informado"
+        for p in participantes
+    )
+
+    dificuldade_trabalho = Counter(
+        p.dificuldade_trabalho or "Não informado"
+        for p in participantes
+    )
+
+    preocupacao_profissional = Counter(
+        p.preocupacao_profissional or "Não informado"
+        for p in participantes
+    )
+
+    conhecimento_direitos = Counter(
+        p.conhecimento_direitos or "Não informado"
+        for p in participantes
+    )
+
+    suporte_cras = Counter(
+        p.suporte_cras or "Não informado"
+        for p in participantes
+    )
+
+    discriminacao = Counter(
+        p.sofreu_discriminacao or "Não informado"
+        for p in participantes
+    )
+
+    # Estatísticas antigas preservadas para compatibilidade
     escolaridade = Counter(
-        (p.escolaridade or "Não informado")
+        p.escolaridade or "Não informado"
         for p in participantes
     )
 
-    # Estatísticas de profissões
     profissoes = Counter(
-        (p.profissao or "Não informado")
+        p.profissao or "Não informado"
         for p in participantes
     )
 
-    # Estatísticas de maternidade
     maternidade = Counter(
-        (p.tem_filhos or "Não informado")
+        p.tem_filhos or "Não informado"
         for p in participantes
     )
 
-    # Quantidade de filhos
     quantidade_filhos = Counter(
         str(p.quantidade_filhos or 0)
         for p in participantes
     )
 
-    # Estatísticas de discriminação
-    discriminacao = Counter(
-        (p.sofreu_discriminacao or "Não informado")
-        for p in participantes
-    )
-
-    # Renderiza o painel
     return templates.TemplateResponse(
         request=request,
         name="admin.html",
@@ -328,6 +487,15 @@ def admin(
             "total": total,
             "discriminacao_sim": discriminacao_sim,
             "percentual_discriminacao": percentual_discriminacao,
+
+            # Pesquisa atual
+            "situacao_trabalho": situacao_trabalho.most_common(),
+            "dificuldade_trabalho": dificuldade_trabalho.most_common(),
+            "preocupacao_profissional": preocupacao_profissional.most_common(),
+            "conhecimento_direitos": conhecimento_direitos.most_common(),
+            "suporte_cras": suporte_cras.most_common(),
+
+            # Compatibilidade com o painel antigo
             "escolaridade": escolaridade.most_common(),
             "profissoes": profissoes.most_common(),
             "maternidade": maternidade.most_common(),

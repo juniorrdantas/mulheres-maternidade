@@ -1,23 +1,87 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resposta enviada</title>
+    <title>Participação confirmada</title>
     <link rel="stylesheet" href="/static/style.css">
+
+    <style>
+        .mensagem-incentivo {
+            background: #f4f8fc;
+            border-left: 5px solid #287a55;
+            border-radius: 8px;
+            padding: 22px;
+            margin: 20px 0;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .mensagem-incentivo h2 {
+            color: #17365d;
+            margin-bottom: 15px;
+        }
+
+        .mensagem-incentivo p {
+            color: #333;
+            font-size: 16px;
+        }
+
+        .agradecimento {
+            color: #287a55;
+            font-weight: bold;
+            font-size: 19px;
+            text-align: center;
+        }
+
+        .voltar-inicio {
+            display: inline-block;
+            margin-top: 15px;
+            color: #17365d;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
+
         <header>
-            <h1>Resposta enviada!</h1>
-            <p>Obrigado por participar da pesquisa.</p>
-            <span>Centro Universitário Cearense</span>
+            <h1>Participação confirmada!</h1>
+            <p>Centro Universitário Cearense</p>
+            <span>Projeto de Extensão</span>
         </header>
+
         <form>
-            <h2>Participação registrada com sucesso.</h2>
-            <p>Sua contribuição é importante para a discussão sobre igualdade de oportunidades e maternidade no mercado de trabalho.</p>
-            <a href="/" style="color:#17365d;">Voltar ao início</a>
+            <p class="agradecimento">
+                <span>✓</span> Sua participação foi registrada com sucesso!
+            </p>
+
+            <div class="mensagem-incentivo">
+                <h2>{{ titulo_incentivo | default("Sua voz importa!") }}</h2>
+
+                <p>
+                    {{ mensagem_incentivo | default(
+                    "Sua participação é muito importante. Cada experiência compartilhada contribui para fortalecer o debate sobre maternidade, igualdade de oportunidades e respeito às mulheres no mercado de trabalho."
+                    ) }}
+                </p>
+            </div>
+
+            <p style="text-align: center;">
+                Obrigado por dedicar seu tempo e compartilhar sua experiência conosco.
+            </p>
+
+            <p style="text-align: center;">
+                Você merece respeito, reconhecimento e oportunidades!
+            </p>
+
+            <div style="text-align: center;">
+                <a href="/" class="voltar-inicio">Voltar ao início</a>
+            </div>
         </form>
+
     </div>
 </body>
 </html>
