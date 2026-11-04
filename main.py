@@ -42,10 +42,21 @@ app.add_middleware(
     https_only=False
 )
 
+# --------------------------------------------------
+# ARQUIVOS ESTÁTICOS
+# --------------------------------------------------
+
 app.mount(
     "/static",
     StaticFiles(directory="static"),
     name="static"
+)
+
+# Disponibilização dos PDFs da apresentação e cartilha
+app.mount(
+    "/documentos",
+    StaticFiles(directory="documentos"),
+    name="documentos"
 )
 
 templates = Jinja2Templates(directory="templates")
@@ -185,7 +196,7 @@ def gerar_mensagem_incentivo(
             "igualdade de oportunidades."
         )
 
-    # Mensagem geral para quem não se enquadrou nas situações acima
+    # Mensagem geral
     return (
         "Sua voz importa e sua história tem valor!",
         "Sua participação contribui para ampliar o diálogo sobre "
