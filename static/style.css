@@ -614,35 +614,47 @@ a {
 }
 
 /* ======================================
-   CELULARES
+   CELULARES (Correção do Cabeçalho)
 ====================================== */
 
 @media (max-width: 700px) {
 
     .topo {
         display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-        padding: 15px 5%;
+        flex-direction: row; /* Mantém em linha como no desktop */
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 12px 15px;
         min-height: auto;
+        position: relative;
     }
 
     .marca {
-        width: 100%;
+        display: flex;
+        align-items: center;
         gap: 8px;
-        flex-shrink: 1;
+        flex: 1;
+        min-width: 0;
     }
 
     .emblema {
-        width: 45px;
-        height: 45px;
-        font-size: 21px;
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .marca div {
+        min-width: 0;
     }
 
     .marca strong {
-        font-size: 11px;
-        padding-right: 0;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .marca small {
@@ -650,39 +662,36 @@ a {
         letter-spacing: 1px;
     }
 
-    /* Documentos no cabeçalho */
-
+    /* Documentos e Engrenagem ajustados para o mobile */
     .acoes-topo {
-        width: 100%;
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
-        justify-content: flex-start;
-        gap: 8px;
-        margin: 0;
-        padding: 0;
+        gap: 6px;
+        margin-left: 0;
+        padding-right: 36px; /* Espaço para a engrenagem absoluta */
+        flex-shrink: 0;
     }
 
     .acoes-topo .botao-documento {
-        flex: 0 1 auto;
-        min-height: 36px;
-        padding: 9px 12px;
-        font-size: 10px;
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 9px;
         white-space: nowrap;
     }
 
     .botao-admin {
-        position: static;
-        transform: none;
-        margin-left: auto;
-        flex-shrink: 0;
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        margin-left: 0;
         width: 30px;
         height: 30px;
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .botao-admin:hover {
-        transform: rotate(45deg);
+        transform: translateY(-50%) rotate(45deg);
     }
 
     main {
