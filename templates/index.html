@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -41,8 +42,6 @@
             transform: translateY(-50%) rotate(45deg);
         }
 
-        /* Acabamento das ilustrações 3D */
-
         .ilustracoes-maternidade {
             align-items: center;
         }
@@ -69,7 +68,160 @@
             z-index: 2;
         }
 
+        /* PROGRESSO DA PESQUISA */
+
+        .progresso-container {
+            width: 100%;
+            margin: 20px 0 30px;
+        }
+
+        .progresso-texto {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #75458e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .progresso-fundo {
+            width: 100%;
+            height: 8px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #f0e6f1;
+        }
+
+        .progresso-preenchimento {
+            width: 0%;
+            height: 100%;
+            border-radius: 20px;
+            background: #75458e;
+            transition: width 0.3s ease;
+        }
+
+        /* ALTERNATIVAS */
+
+        .alternativas {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+            width: 100%;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+
+        .alternativa {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            width: 100%;
+            min-height: 58px;
+            box-sizing: border-box;
+            padding: 15px 18px;
+            border: 1px solid #eaddea;
+            border-radius: 12px;
+            background: #ffffff;
+            cursor: pointer;
+            line-height: 1.5;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .alternativa:hover {
+            border-color: #75458e;
+            background: #fdf8fc;
+        }
+
+        .alternativa input[type="radio"] {
+            display: block;
+            flex: 0 0 18px;
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            padding: 0;
+            accent-color: #75458e;
+            cursor: pointer;
+        }
+
+        .alternativa span {
+            display: block;
+            flex: 1;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .alternativa:has(input:checked) {
+            border-color: #75458e;
+            background: #f8eff8;
+        }
+
+        /* NAVEGAÇÃO */
+
+        .navegacao-perguntas {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .navegacao-perguntas button {
+            min-height: 46px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .botao-anterior {
+            border: 1px solid #75458e;
+            background: #ffffff;
+            color: #75458e;
+        }
+
+        .botao-proximo {
+            border: none;
+            background: #75458e;
+            color: #ffffff;
+        }
+
+        .botao-anterior:hover,
+        .botao-proximo:hover {
+            opacity: 0.88;
+        }
+
+        /* TÍTULOS */
+
+        .pergunta-titulo {
+            color: #75458e;
+            font-size: 21px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .orientacao-pergunta {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tela-pergunta[hidden] {
+            display: none !important;
+        }
+
+        /* RESPONSIVIDADE */
+
         @media (max-width: 600px) {
+
             .botao-admin {
                 right: 12px;
                 width: 32px;
@@ -80,6 +232,30 @@
             .ilustracao-card:nth-child(2) {
                 margin-top: 0;
             }
+
+            .alternativa {
+                min-height: 54px;
+                padding: 13px 14px;
+                gap: 10px;
+            }
+
+            .alternativa input[type="radio"] {
+                flex: 0 0 18px;
+                width: 18px;
+                height: 18px;
+            }
+
+            .alternativa span {
+                font-size: 14px;
+            }
+
+            .pergunta-titulo {
+                font-size: 19px;
+            }
+
+            .navegacao-perguntas button {
+                padding: 11px 14px;
+            }
         }
     </style>
 </head>
@@ -87,13 +263,16 @@
 <body>
 
 <header class="topo">
+
     <div class="marca">
+
         <div class="emblema">M<span>+</span></div>
 
         <div class="identificacao">
             <strong>CENTRO UNIVERSITÁRIO CEARENSE</strong>
             <small>PROJETO DE EXTENSÃO</small>
         </div>
+
     </div>
 
     <a
@@ -103,6 +282,7 @@
         aria-label="Acesso administrativo">
         ⚙
     </a>
+
 </header>
 
 <main>
@@ -150,28 +330,32 @@
 
         </div>
 
-        <!-- ILUSTRAÇÕES EDITORIAIS 3D -->
-
         <div class="ilustracao">
 
             <div class="ilustracoes-maternidade">
 
-                <!-- ILUSTRAÇÃO 1: MÃE E BEBÊ -->
-
                 <div class="ilustracao-card">
-                    <img src="/static/mae-bebe.png" alt="Ilustração 3D de mãe abraçando carinhosamente seu bebê">
+
+                    <img
+                        src="/static/mae-bebe.png"
+                        alt="Ilustração 3D de mãe abraçando carinhosamente seu bebê">
+
                     <div class="ilustracao-legenda">
                         Amor que acolhe
                     </div>
+
                 </div>
 
-                <!-- ILUSTRAÇÃO 2: MULHER GESTANTE -->
-
                 <div class="ilustracao-card">
-                    <img src="/static/mae-gravida.png" alt="Ilustração 3D de mulher grávida acariciando delicadamente sua barriga">
+
+                    <img
+                        src="/static/mae-gravida.png"
+                        alt="Ilustração 3D de mulher grávida acariciando sua barriga">
+
                     <div class="ilustracao-legenda">
                         Amor que gera vida
                     </div>
+
                 </div>
 
             </div>
@@ -180,7 +364,81 @@
 
     </section>
 
-    <!-- TELA DA PESQUISA -->
+
+    <!-- TELA DE IDENTIFICAÇÃO -->
+
+    <section
+        class="tela-pesquisa"
+        id="tela-identificacao"
+        hidden>
+
+        <div class="cabecalho-pesquisa">
+
+            <button
+                type="button"
+                id="btn-voltar-inicial"
+                class="botao-voltar">
+                ← Voltar
+            </button>
+
+            <span class="etiqueta">PESQUISA ACADÊMICA</span>
+
+            <h1>Antes de começar...</h1>
+
+            <p>
+                Informe seu nome completo e sua idade
+                para continuar com a pesquisa.
+            </p>
+
+        </div>
+
+        <div class="questionario">
+
+            <form id="form-identificacao">
+
+                <div class="campo">
+
+                    <label for="identificacao-nome">
+                        Nome completo *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="identificacao-nome"
+                        required
+                        autocomplete="name"
+                        placeholder="Digite seu nome completo">
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="identificacao-idade">
+                        Idade *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="identificacao-idade"
+                        min="16"
+                        max="120"
+                        required
+                        placeholder="Digite sua idade">
+
+                </div>
+
+                <button type="submit" class="botao-enviar">
+                    Continuar para a pesquisa →
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUESTIONÁRIO: UMA PERGUNTA POR TELA -->
 
     <section
         class="tela-pesquisa"
@@ -191,150 +449,425 @@
 
             <button
                 type="button"
-                id="btn-voltar"
+                id="btn-voltar-identificacao"
                 class="botao-voltar">
                 ← Voltar
             </button>
 
             <span class="etiqueta">PESQUISA ACADÊMICA</span>
 
-            <h1>Participe da nossa pesquisa</h1>
+            <h1>Sua experiência importa!</h1>
 
             <p>
-                Sua experiência é importante para este estudo.
                 Responda às perguntas abaixo.
+                Suas respostas contribuirão para este estudo.
             </p>
 
         </div>
 
-        <!-- FORMULÁRIO -->
-
         <div class="questionario">
 
-            <form action="/responder" method="post">
+            <form
+                id="form-pesquisa"
+                action="/responder"
+                method="post">
 
-                <div class="campo">
-                    <label for="nome">Nome</label>
+                <!-- IDENTIFICAÇÃO ENVIADA AO BANCO -->
 
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        autocomplete="name"
-                        required>
-                </div>
+                <input type="hidden" id="nome" name="nome">
+                <input type="hidden" id="idade" name="idade">
 
-                <div class="grade">
 
-                    <div class="campo">
-                        <label for="idade">Idade</label>
+                <!-- PROGRESSO -->
 
-                        <input
-                            type="number"
-                            id="idade"
-                            name="idade"
-                            min="16"
-                            max="120"
-                            required>
+                <div class="progresso-container">
+
+                    <div class="progresso-texto">
+                        <span id="progresso-etapa">Pergunta 1 de 7</span>
+                        <span id="progresso-percentual">14%</span>
                     </div>
 
-                    <div class="campo">
-                        <label for="profissao">Profissão</label>
+                    <div class="progresso-fundo">
 
-                        <input
-                            type="text"
-                            id="profissao"
-                            name="profissao"
-                            required>
+                        <div
+                            class="progresso-preenchimento"
+                            id="progresso-preenchimento">
+                        </div>
+
                     </div>
 
                 </div>
 
-                <div class="campo">
-                    <label for="escolaridade">Escolaridade</label>
 
-                    <select
-                        id="escolaridade"
-                        name="escolaridade"
-                        required>
+                <!-- PERGUNTA 1 -->
 
-                        <option value="">Selecione</option>
-                        <option>Ensino fundamental</option>
-                        <option>Ensino médio</option>
-                        <option>Ensino superior incompleto</option>
-                        <option>Ensino superior completo</option>
-                        <option>Pós-graduação</option>
+                <div class="tela-pergunta" data-etapa="0">
 
-                    </select>
-                </div>
+                    <h2 class="pergunta-titulo">
+                        1. Qual é a sua situação de trabalho atual?
+                    </h2>
 
-                <div class="grade">
+                    <p class="orientacao-pergunta">
+                        Selecione uma alternativa.
+                    </p>
 
-                    <div class="campo">
-                        <label for="tem_filhos">
-                            Você tem filhos?
+                    <div class="alternativas">
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="situacao_trabalho"
+                                value="Trabalho com carteira assinada (CLT) ou sou servidora pública"
+                                required>
+                            <span>Trabalho com carteira assinada (CLT) ou sou servidora pública.</span>
                         </label>
 
-                        <select
-                            id="tem_filhos"
-                            name="tem_filhos"
-                            required>
-
-                            <option value="">Selecione</option>
-                            <option>Sim</option>
-                            <option>Não</option>
-
-                        </select>
-                    </div>
-
-                    <div class="campo">
-                        <label for="quantidade_filhos">
-                            Quantidade de filhos
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="situacao_trabalho"
+                                value="Trabalho por conta própria / autônoma / informal"
+                                required>
+                            <span>Trabalho por conta própria / autônoma / informal.</span>
                         </label>
 
-                        <input
-                            type="number"
-                            id="quantidade_filhos"
-                            name="quantidade_filhos"
-                            min="0"
-                            value="0">
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="situacao_trabalho"
+                                value="Estou desempregada e procurando trabalho"
+                                required>
+                            <span>Estou desempregada e procurando trabalho.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="situacao_trabalho"
+                                value="Estou fora do mercado de trabalho e não busco no momento"
+                                required>
+                            <span>Estou fora do mercado de trabalho e não busco no momento.</span>
+                        </label>
+
                     </div>
 
                 </div>
 
-                <div class="campo">
-                    <label for="sofreu_discriminacao">
-                        Já sofreu discriminação profissional relacionada à maternidade?
-                    </label>
 
-                    <select
-                        id="sofreu_discriminacao"
-                        name="sofreu_discriminacao"
-                        required>
+                <!-- PERGUNTA 2 -->
 
-                        <option value="">Selecione</option>
-                        <option>Sim</option>
-                        <option>Não</option>
-                        <option>Prefiro não responder</option>
+                <div class="tela-pergunta" data-etapa="1" hidden>
 
-                    </select>
+                    <h2 class="pergunta-titulo">
+                        2. Desde que engravidou (ou no seu último emprego),
+                        você sentiu alguma dificuldade ou preconceito
+                        no ambiente de trabalho ou em entrevistas?
+                    </h2>
+
+                    <p class="orientacao-pergunta">
+                        Selecione uma alternativa.
+                    </p>
+
+                    <div class="alternativas">
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="dificuldade_trabalho"
+                                value="Sim, senti rejeição em entrevistas ou afastamento/pressão no trabalho"
+                                required>
+                            <span>Sim, senti rejeição em entrevistas ou afastamento/pressão no trabalho.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="dificuldade_trabalho"
+                                value="Não, fui bem acolhida e respeitada"
+                                required>
+                            <span>Não, fui bem acolhida e respeitada.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="dificuldade_trabalho"
+                                value="Não passei por processos seletivos nem estava trabalhando nesse período"
+                                required>
+                            <span>Não passei por processos seletivos nem estava trabalhando nesse período.</span>
+                        </label>
+
+                    </div>
+
                 </div>
 
-                <div class="campo">
-                    <label for="relato">
-                        Gostaria de relatar alguma experiência?
-                    </label>
 
-                    <textarea
-                        id="relato"
-                        name="relato"
-                        rows="5"
-                        placeholder="Compartilhe sua experiência, se desejar..."></textarea>
+                <!-- PERGUNTA 3 -->
+
+                <div class="tela-pergunta" data-etapa="2" hidden>
+
+                    <h2 class="pergunta-titulo">
+                        3. Qual é a sua maior preocupação em relação
+                        ao seu futuro profissional após o nascimento do bebê?
+                    </h2>
+
+                    <p class="orientacao-pergunta">
+                        Selecione uma alternativa.
+                    </p>
+
+                    <div class="alternativas">
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="preocupacao_profissional"
+                                value="Perder o emprego ou ter dificuldades para conseguir um novo trabalho"
+                                required>
+                            <span>Perder o emprego ou ter dificuldades para conseguir um novo trabalho.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="preocupacao_profissional"
+                                value="Conseguir conciliar o tempo de cuidar do bebê com a rotina de trabalho"
+                                required>
+                            <span>Conseguir conciliar o tempo de cuidar do bebê com a rotina de trabalho.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="preocupacao_profissional"
+                                value="Ter com quem deixar o bebê (vaga em creche ou rede de apoio)"
+                                required>
+                            <span>Ter com quem deixar o bebê (vaga em creche ou rede de apoio).</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="preocupacao_profissional"
+                                value="Ter renda suficiente para manter a família"
+                                required>
+                            <span>Ter renda suficiente para manter a família.</span>
+                        </label>
+
+                    </div>
+
                 </div>
 
-                <button type="submit" class="botao-enviar">
-                    Enviar minha participação →
-                </button>
+
+                <!-- PERGUNTA 4 -->
+
+                <div class="tela-pergunta" data-etapa="3" hidden>
+
+                    <h2 class="pergunta-titulo">
+                        4. Você conhece os seus direitos trabalhistas
+                        garantidos durante a gestação e no pós-parto,
+                        como estabilidade, licença-maternidade
+                        e pausas para amamentar?
+                    </h2>
+
+                    <p class="orientacao-pergunta">
+                        Selecione uma alternativa.
+                    </p>
+
+                    <div class="alternativas">
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="conhecimento_direitos"
+                                value="Conheço bem os meus direitos"
+                                required>
+                            <span>Conheço bem os meus direitos.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="conhecimento_direitos"
+                                value="Conheço apenas alguns"
+                                required>
+                            <span>Conheço apenas alguns.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="conhecimento_direitos"
+                                value="Tenho muitas dúvidas ou não conheço meus direitos"
+                                required>
+                            <span>Tenho muitas dúvidas ou não conheço meus direitos.</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PERGUNTA 5 -->
+
+                <div class="tela-pergunta" data-etapa="4" hidden>
+
+                    <h2 class="pergunta-titulo">
+                        5. Que tipo de suporte do CRAS ou da comunidade
+                        mais ajudaria você a se manter no mercado
+                        de trabalho ou conseguir uma renda?
+                    </h2>
+
+                    <p class="orientacao-pergunta">
+                        Selecione uma alternativa.
+                    </p>
+
+                    <div class="alternativas">
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="suporte_cras"
+                                value="Informação e suporte jurídico/social sobre direitos das mães"
+                                required>
+                            <span>Informação e suporte jurídico/social sobre direitos das mães.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="suporte_cras"
+                                value="Cursos de capacitação profissional e empreendedorismo"
+                                required>
+                            <span>Cursos de capacitação profissional e empreendedorismo.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="suporte_cras"
+                                value="Orientação para conseguir vaga em creche pública"
+                                required>
+                            <span>Orientação para conseguir vaga em creche pública.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="suporte_cras"
+                                value="Apoio psicológico para lidar com a ansiedade da volta ao trabalho"
+                                required>
+                            <span>Apoio psicológico para lidar com a ansiedade da volta ao trabalho.</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PERGUNTA 6 -->
+
+                <div class="tela-pergunta" data-etapa="5" hidden>
+
+                    <h2 class="pergunta-titulo">
+                        6. Já sofreu discriminação profissional
+                        relacionada à maternidade?
+                    </h2>
+
+                    <p class="orientacao-pergunta">
+                        Selecione uma alternativa.
+                    </p>
+
+                    <div class="alternativas">
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="sofreu_discriminacao"
+                                value="Sim"
+                                required>
+                            <span>Sim.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="sofreu_discriminacao"
+                                value="Não"
+                                required>
+                            <span>Não.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input
+                                type="radio"
+                                name="sofreu_discriminacao"
+                                value="Prefiro não responder"
+                                required>
+                            <span>Prefiro não responder.</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PERGUNTA 7 -->
+
+                <div class="tela-pergunta" data-etapa="6" hidden>
+
+                    <h2 class="pergunta-titulo">
+                        7. Gostaria de relatar alguma experiência?
+                    </h2>
+
+                    <p class="orientacao-pergunta">
+                        Esta pergunta é opcional.
+                        Se desejar, compartilhe sua experiência.
+                    </p>
+
+                    <div class="campo">
+
+                        <label for="relato">
+                            Seu relato
+                        </label>
+
+                        <textarea
+                            id="relato"
+                            name="relato"
+                            rows="7"
+                            placeholder="Compartilhe sua experiência, se desejar..."></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BOTÕES DE NAVEGAÇÃO -->
+
+                <div class="navegacao-perguntas">
+
+                    <button
+                        type="button"
+                        class="botao-anterior"
+                        id="btn-pergunta-anterior">
+                        ← Voltar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="botao-proximo"
+                        id="btn-proxima-pergunta">
+                        Próxima →
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="botao-enviar"
+                        id="btn-finalizar"
+                        hidden>
+                        Enviar minha participação →
+                    </button>
+
+                </div>
 
             </form>
 
@@ -343,6 +876,7 @@
     </section>
 
 </main>
+
 
 <!-- RODAPÉ -->
 
@@ -358,43 +892,223 @@
         Igualdade de oportunidades e respeito à maternidade.
     </p>
 
+    <p>ACADÊMICOS:</p>
+
+    <p>CLAUDENIR, JEIFFERSON, LAMARE E JONAS.</p>
+
 </footer>
 
-<!-- NAVEGAÇÃO ENTRE AS TELAS -->
+
+<!-- NAVEGAÇÃO E VALIDAÇÃO -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const telaInicial = document.getElementById("tela-inicial");
+    const telaIdentificacao = document.getElementById("tela-identificacao");
     const telaPesquisa = document.getElementById("tela-pesquisa");
+
     const rodape = document.getElementById("rodape");
 
     const botaoParticipar = document.getElementById("btn-participar");
-    const botaoVoltar = document.getElementById("btn-voltar");
+    const botaoVoltarInicial = document.getElementById("btn-voltar-inicial");
+    const botaoVoltarIdentificacao = document.getElementById("btn-voltar-identificacao");
+
+    const formIdentificacao = document.getElementById("form-identificacao");
+    const formPesquisa = document.getElementById("form-pesquisa");
+
+    const perguntas = Array.from(
+        document.querySelectorAll(".tela-pergunta")
+    );
+
+    const botaoAnterior = document.getElementById("btn-pergunta-anterior");
+    const botaoProxima = document.getElementById("btn-proxima-pergunta");
+    const botaoFinalizar = document.getElementById("btn-finalizar");
+
+    const progressoEtapa = document.getElementById("progresso-etapa");
+    const progressoPercentual = document.getElementById("progresso-percentual");
+    const progressoPreenchimento = document.getElementById("progresso-preenchimento");
+
+    let etapaAtual = 0;
+
+    const totalPerguntas = perguntas.length;
+
+
+    // TROCA DE TELAS
+
+    function mostrarTela(tela) {
+
+        telaInicial.hidden = tela !== telaInicial;
+        telaIdentificacao.hidden = tela !== telaIdentificacao;
+        telaPesquisa.hidden = tela !== telaPesquisa;
+
+        rodape.hidden = tela !== telaInicial;
+
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
+    }
+
+
+    // ABRIR IDENTIFICAÇÃO
 
     botaoParticipar.addEventListener("click", function () {
-
-        telaInicial.hidden = true;
-        rodape.hidden = true;
-        telaPesquisa.hidden = false;
-
-        window.scrollTo({
-            top: 0,
-            behavior: "instant"
-        });
-
+        mostrarTela(telaIdentificacao);
     });
 
-    botaoVoltar.addEventListener("click", function () {
 
-        telaPesquisa.hidden = true;
-        telaInicial.hidden = false;
-        rodape.hidden = false;
+    // VOLTAR PARA A PÁGINA INICIAL
+
+    botaoVoltarInicial.addEventListener("click", function () {
+        mostrarTela(telaInicial);
+    });
+
+
+    // VALIDAR E AVANÇAR DA IDENTIFICAÇÃO
+
+    formIdentificacao.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        if (!formIdentificacao.reportValidity()) {
+            return;
+        }
+
+        const nome = document.getElementById("identificacao-nome").value.trim();
+        const idade = document.getElementById("identificacao-idade").value;
+
+        const partesNome = nome.split(/\s+/).filter(Boolean);
+
+        const conectivos = ["de", "da", "do", "das", "dos", "e"];
+
+        const nomesValidos = partesNome.filter(function (parte) {
+            return !conectivos.includes(
+                parte.toLocaleLowerCase("pt-BR")
+            );
+        });
+
+        if (nomesValidos.length < 2) {
+            alert("Informe seu nome e sobrenome para continuar.");
+            document.getElementById("identificacao-nome").focus();
+            return;
+        }
+
+        document.getElementById("nome").value = nome;
+        document.getElementById("idade").value = idade;
+
+        etapaAtual = 0;
+
+        atualizarPergunta();
+
+        mostrarTela(telaPesquisa);
+    });
+
+
+    // ATUALIZAR A PERGUNTA VISÍVEL
+
+    function atualizarPergunta() {
+
+        perguntas.forEach(function (pergunta, indice) {
+            pergunta.hidden = indice !== etapaAtual;
+        });
+
+        const numeroPergunta = etapaAtual + 1;
+
+        const percentual = Math.round(
+            (numeroPergunta / totalPerguntas) * 100
+        );
+
+        progressoEtapa.textContent =
+            "Pergunta " + numeroPergunta + " de " + totalPerguntas;
+
+        progressoPercentual.textContent = percentual + "%";
+
+        progressoPreenchimento.style.width = percentual + "%";
+
+        botaoAnterior.hidden = etapaAtual === 0;
+
+        botaoProxima.hidden = etapaAtual === totalPerguntas - 1;
+
+        botaoFinalizar.hidden = etapaAtual !== totalPerguntas - 1;
 
         window.scrollTo({
             top: 0,
             behavior: "instant"
         });
+    }
+
+
+    // VERIFICAR SE A PERGUNTA ATUAL FOI RESPONDIDA
+
+    function perguntaRespondida() {
+
+        const perguntaAtual = perguntas[etapaAtual];
+
+        const alternativas = perguntaAtual.querySelectorAll(
+            'input[type="radio"]'
+        );
+
+        if (alternativas.length > 0) {
+
+            const selecionada = perguntaAtual.querySelector(
+                'input[type="radio"]:checked'
+            );
+
+            if (!selecionada) {
+                alert("Selecione uma alternativa para continuar.");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    // AVANÇAR
+
+    botaoProxima.addEventListener("click", function () {
+
+        if (!perguntaRespondida()) {
+            return;
+        }
+
+        if (etapaAtual < totalPerguntas - 1) {
+            etapaAtual++;
+            atualizarPergunta();
+        }
+    });
+
+
+    // VOLTAR UMA PERGUNTA
+
+    botaoAnterior.addEventListener("click", function () {
+
+        if (etapaAtual > 0) {
+            etapaAtual--;
+            atualizarPergunta();
+        }
+    });
+
+
+    // VOLTAR À IDENTIFICAÇÃO
+
+    botaoVoltarIdentificacao.addEventListener("click", function () {
+        mostrarTela(telaIdentificacao);
+    });
+
+
+    // VALIDAR TODAS AS RESPOSTAS ANTES DO ENVIO
+
+    formPesquisa.addEventListener("submit", function (event) {
+
+        if (!perguntaRespondida()) {
+            event.preventDefault();
+            return;
+        }
+
+        // O navegador enviará o formulário normalmente
+        // para a rota /responder.
 
     });
 
