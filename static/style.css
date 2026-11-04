@@ -621,84 +621,85 @@ a {
 
     .topo {
         display: flex;
-        flex-direction: column; /* Organiza os elementos de cima para baixo no telemóvel */
-        align-items: center;    /* Centraliza tudo horizontalmente */
-        justify-content: center;
-        gap: 12px;
-        padding: 18px 15px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 12px 15px;
         min-height: auto;
         position: relative;
     }
 
     .marca {
         display: flex;
-        flex-direction: column; /* Coloca o emblema em cima e os textos abaixo dele */
         align-items: center;
-        text-align: center;
-        gap: 8px;
-        width: 100%;
-        margin-bottom: 5px;
+        gap: 10px;
+        flex: 1;
+        min-width: 0;
+        padding-right: 35px; /* Espaço reservado para a engrenagem não cobrir o texto */
     }
 
     .emblema {
-        width: 48px;
-        height: 48px;
-        font-size: 22px;
+        width: 40px;
+        height: 40px;
+        font-size: 19px;
         flex-shrink: 0;
     }
 
     .marca div {
-        width: 100%;
+        min-width: 0;
+        flex: 1;
     }
 
     .marca strong {
-        font-size: 11px;
+        font-size: 10px;
         letter-spacing: 0.5px;
-        white-space: normal;
-        line-height: 1.3;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .marca small {
-        font-size: 9px;
+        font-size: 8px;
         letter-spacing: 1px;
-        margin-top: 3px;
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    /* Botões de documentos centralizados abaixo do cabeçalho */
+    /* Botões de acesso logo abaixo ou compactos */
     .acoes-topo {
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        margin: 0;
+        gap: 6px;
+        margin-left: 0;
         padding: 0;
+        flex-shrink: 0;
     }
 
     .acoes-topo .botao-documento {
-        flex: 1 1 auto;
-        min-height: 36px;
-        padding: 8px 12px;
-        font-size: 10px;
+        min-height: 32px;
+        padding: 6px 10px;
+        font-size: 9px;
         white-space: nowrap;
-        text-align: center;
     }
 
-    /* Botão da engrenagem reposicionado discretamente no canto superior direito */
+    /* Engrenagem fixa e discreta no canto superior direito */
     .botao-admin {
         position: absolute;
-        top: 12px;
+        top: 50%;
         right: 12px;
-        transform: none;
+        transform: translateY(-50%);
         margin-left: 0;
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
+        width: 28px;
+        height: 28px;
+        font-size: 15px;
     }
 
     .botao-admin:hover {
-        transform: rotate(45deg);
+        transform: translateY(-50%) rotate(45deg);
     }
 
     main {
