@@ -1,6 +1,7 @@
 
 from sqlalchemy import Column, Integer, String, Text, DateTime
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from database import Base
 
 
@@ -29,4 +30,7 @@ class Participante(Base):
     relato = Column(Text, nullable=True)
 
     # Data do cadastro
-    data_cadastro = Column(DateTime, default=datetime.now)
+    data_cadastro = Column(
+    DateTime,
+    default=lambda: datetime.now(ZoneInfo("America/Fortaleza"))
+)
